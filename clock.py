@@ -1,29 +1,3 @@
-#
-# Raspberry nightstand clock project
-#
-# * Can charge an iPhone
-# * Triggered on button or IR movement sensor:
-#
-# 	Display time and date
-# 	Sync time and date with NTP
-# 	Display latest stock market information if it is a traiding day
-#	Display local wather info
-# 
-# Display:
-# dd/MM HH/MM
-#	
-# Steps:
-# 1. Install fresh Raspbian Jesse lite image
-# 2. Resize part, change password
-# 3. Update latest libraries
-#	sudo apt-get update
-#	sudo apt-get dist-upgrade
-# 4. Configure wi-fi
-#	https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md
-# 5. Using raspi-config enable SPI interface
-# 6. Follow:
-# http://www.smbaker.com/interfacing-a-vfd-display-to-the-raspberry-pi
-
 import spidev
 import requests
 import sys
