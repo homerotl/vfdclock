@@ -1,17 +1,37 @@
 # Raspberry PI Nightstand Clock project
 
+The objective of this project is to create a cool nightstand clock 
+that can provide me with additional relevant information for my day 
+and at the same time be discrete so it does not light up the room
+when I am trying to sleep.
+
+# Current state:
+
+I had a Raspberry Pi B+ laying around from a previous project so I dusted it
+and flashed a 2 GB Micro SD card with Raspbian Jesse Lite. For the display
+I chose a Noritake Vacumm Flourecent Display (VFD) because I like the retro look.
+I am also using a USB Wi-fi dongle.
+For the case I am using a temporary setup made with Legos. Here is how it looks like right now:
+
+![Current state](http://imgur.com/ZFq8nve)
+http://imgur.com/ZFq8nve
+
+Here is what it does right now:
+
  * Display date and time using a Vacuum Fluorescent Display (VFD) controlled by a Raspberry PI using a SPI interface 
  * Able to charge an iPhone via USB and lightning cable
+
+And this is the To-Do list:
+
  * By default the display is off and it gets activated by a motion sensor on top 
  * Sync time and date with NTP
  * Display latest stock market information if it is a traiding day
  * Display local wather info
 
+# Setup Steps:
 
-# Steps:
-1. Install fresh Raspbian Jesse lite image
-1. Resize part, change password
-1. Update latest libraries
+1. Install fresh Raspbian Jesse lite image, resize partition, set password.
+1. Using wired ethernet update installation:
 	sudo apt-get update
 	sudo apt-get dist-upgrade
 1. Configure wi-fi
