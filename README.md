@@ -13,7 +13,7 @@ I chose a Noritake Vacumm Flourecent Display (VFD) because I like the retro look
 I am also using a USB Wi-fi dongle.
 For the case I am using a temporary setup made with Legos. Here is how it looks like right now:
 
-[Imgur](http://i.imgur.com/ZFq8nve.jpg)
+![Imgur](http://i.imgur.com/ZFq8nve.jpg)
 
 Here is what it does right now:
 
