@@ -19,12 +19,13 @@ Here is what it does right now:
 
  * Display date and time using a Vacuum Fluorescent Display (VFD) controlled by a Raspberry PI using a SPI interface 
  * Able to charge an iPhone via USB and lightning cable
+ * Display latest stock market information
 
 And this is the To-Do list:
 
  * By default the display is off and it gets activated by a motion sensor on top 
  * Sync time and date with NTP
- * Display latest stock market information if it is a traiding day
+ * Display stock market information only if it is a traiding day
  * Display local wather info
 
 # Setup Steps:
