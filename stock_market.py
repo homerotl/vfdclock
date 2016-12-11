@@ -13,7 +13,7 @@ class Stocks:
         self.symbollist = ",".join(symbols.keys()) 
         self.response = requests.get(self.url.format(self.symbollist), headers=self.headers, params=self.payload)
         self.quotelist = self.response.json()['list']['resources']       
-        self.textback = '    '
+        self.textback = ''
         for aquote in self.quotelist:
            self.textback = self.textback + symbols[aquote['resource']['fields']['symbol']] + ' ' + "{0:+.02f}".format(float(aquote['resource']['fields']['chg_percent'])) + '%    '
         return self.textback 
