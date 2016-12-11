@@ -8,13 +8,13 @@ from datetime import datetime
 from datetime import timedelta
 
 displaySize = 16
-darkTimeSeconds = 60 * 5
+darkTimeSeconds = 60 * 15 
 vfd = VFD(0,0)
 stepDelay = 0.25
 tickerEndPause = 4 
 tickerRounds = 3
 stockM = Stocks()
-stock_symbols = ['^GSPC','^DJI','^IXIC','^RUT','NKE']
+stock_symbols = {'^GSPC':'S&P 500','^DJI':'Dow 30','^IXIC':'Nasdaq','^RUT':'Rusell 2000','NKE':'Nike, Inc.'}
 ticker = stockM.getStockInfo(stock_symbols) 
 
 try:

@@ -39,5 +39,7 @@ And this is the To-Do list:
 1. Using raspi-config enable SPI interface
 1. Follow:
 	http://www.smbaker.com/interfacing-a-vfd-display-to-the-raspberry-pi
+1. Install Python dateutil
+        sudo pip install python-dateutil
 1. Setup script to start on boot:
 	Edit `/etc/local.rc` and add at the end `sudo python /home/pi/vfdclock/clock.py`
