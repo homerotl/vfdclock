@@ -8,8 +8,10 @@ class Weather:
 # city is aa string with the city name and state, like 'Austin, TX' 
 
     def getWeatherInfo(self, city):
-        self.response = requests.get(self.url.format(city))
-        self.condition = self.response.json()['query']['results']['channel']['item']['condition']       
-        self.textback = self.condition['text'] + ' ' + self.condition['temp'] + ' F'
-        return self.textback 
-
+        try:
+           self.response = requests.get(self.url.format(city))
+           self.condition = self.response.json()['query']['results']['channel']['item']['condition']       
+           self.textback = self.condition['text'] + ' ' + self.condition['temp'] + ' F'
+           return self.textback 
+        except:
+           return 'Unavailable'

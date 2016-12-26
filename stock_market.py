@@ -1,4 +1,6 @@
 import requests
+import dateutil.parser
+from datetime import timedelta
 
 class Stocks:
     def __init__(self):
@@ -10,11 +12,14 @@ class Stocks:
 # symbols is a dictionary where the key is the stock symbol and the value is the display name 
 
     def getStockInfo(self, symbols):
-        self.symbollist = ",".join(symbols.keys()) 
-        self.response = requests.get(self.url.format(self.symbollist), headers=self.headers, params=self.payload)
-        self.quotelist = self.response.json()['list']['resources']       
-        self.textback = ''
-        for aquote in self.quotelist:
-           self.textback = self.textback + symbols[aquote['resource']['fields']['symbol']] + ' ' + "{0:+.02f}".format(float(aquote['resource']['fields']['chg_percent'])) + '%    '
-        return self.textback 
-
+        try:
+           self.symbollist = ",".join(symbols.keys()) 
+           self.response = requests.get(self.url.format(self.symbollist), headers=self.headers, params=self.payload)
+           self.quotelist = self.response.json()['list']['resources']       
+           self.textback = ''
+           for aquote in self.quotelist:
+              #if dateutil.parser.parse(aquote['resource']['fields']['utctime']).timedelta(
+              self.textback = self.textback + symbols[aquote['resource']['fields']['symbol']] + ' ' + "{0:+.02f}".format(float(aquote['resource']['fields']['chg_percent'])) + '%    '
+           return self.textback 
+        except:
+           return 'Unavailable'

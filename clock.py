@@ -1,6 +1,7 @@
 import spidev
 import sys
 import time
+import RPi.GPIO as GPIO
 
 from vfd import VFD
 from stock_market import Stocks
@@ -9,11 +10,14 @@ from datetime import datetime
 from datetime import timedelta
 
 displaySize = 16
-darkTimeSeconds = 60 * 15 
 vfd = VFD(0,0)
-stepDelay = 0.20
-tickerEndPause = 4 
-tickerRounds = 3
+stepDelay = 0.15
+tickerEndPause = 3 
+
+# Configure PIR motion detector
+PIRport = 18
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(PIRport, GPIO.IN)
 
 # Stocks config
 stockM = Stocks()
@@ -25,20 +29,22 @@ weatherI = Weather()
 location='Beaverton, OR'
 
 try:
+
    while True:
       
-      # calculate the next execution time
-      endTime = datetime.now() + timedelta(0,darkTimeSeconds)
+      inputState = GPIO.input(PIRport)
       
-      # check latest stock info, if it is a weekday 
-      if datetime.now().weekday() < lastStockDay:
-         ticker = stockM.getStockInfo(stock_symbols)
-      
-      # check latest weather info
-      weatherTicker = weatherI.getWeatherInfo(location)
-      
-      for j in range (0, tickerRounds):
+      if inputState == True:
 
+         print('Motion detected')
+
+         # check latest stock info, if it is a weekday 
+         if datetime.now().weekday() < lastStockDay:
+            ticker = stockM.getStockInfo(stock_symbols)
+      
+         # check latest weather info
+         weatherTicker = weatherI.getWeatherInfo(location)
+      
          # Update current time
          vfd.setPosition(0,0)
          vfd.writeStr(datetime.strftime(datetime.now(), '%b/%d  %I:%M %p')) 
@@ -55,6 +61,7 @@ try:
                   vfd.setPosition(0,1)
                   vfd.writeStr(('   '+ticker)[n:n+displaySize])
                   time.sleep(stepDelay)
+
                time.sleep(tickerEndPause)
 
          if len(weatherTicker) <= displaySize :
@@ -70,10 +77,9 @@ try:
          
          time.sleep(tickerEndPause)
       
-      vfd.cls()
+         vfd.cls()
 
-      while datetime.now() < endTime:
+      else:
          time.sleep(1)
-
 finally:
    vfd.cls()
