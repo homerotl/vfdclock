@@ -27,6 +27,8 @@ lastStockDay = 5 # firday=5
 # Weather config
 weatherI = Weather()
 location='Beaverton, OR'
+weatherLatencyMinutes = 10
+nextWeatherCheckTime = datetime.now() - timedelta(seconds=1)  
 
 try:
 
@@ -43,8 +45,10 @@ try:
             ticker = stockM.getStockInfo(stock_symbols)
       
          # check latest weather info
-         weatherTicker = weatherI.getWeatherInfo(location)
-      
+         if datetime.now() > nextWeatherCheckTime : 
+            weatherTicker = weatherI.getWeatherInfo(location)
+            nextWeatherCheckTime = datetime.now() + timedelta(minutes=weatherLatencyMinutes)
+ 
          # Update current time
          vfd.setPosition(0,0)
          vfd.writeStr(datetime.strftime(datetime.now(), '%b/%d  %I:%M %p')) 
@@ -80,6 +84,9 @@ try:
          vfd.cls()
 
       else:
+         if datetime.now() > nextWeatherCheckTime :
+            weatherTicker = weatherI.getWeatherInfo(location)
+            nextWeatherCheckTime = datetime.now() + timedelta(minutes=weatherLatencyMinutes) 
          time.sleep(1)
 finally:
    vfd.cls()
